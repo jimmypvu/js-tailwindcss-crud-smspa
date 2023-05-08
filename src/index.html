@@ -4,128 +4,145 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Litter - A Dumpster Fire of a Twitter Clone</title>
+    <title>Litter - Where Twitter is Heading</title>
     <link href="/dist/output.css" rel="stylesheet">
     <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.css">
 </head>
 <body class="bg-gray-800">
-    <div class="header">
-        <header class="max-h-24 bg-neutral-800 p-2 flex flex-row justify-between">
-            <div class="flex flex-col justify-center">
-                <div class="min-w-fit flex flex-row justify-evenly space-x-2">
-                    <a href="index.html" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
-                        <div class="flex flex-row justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-lg min-w-fit">
-                            <img src="../img/house-user-solid.svg" class="h-4 w-4 opacity-50" />
-                            <button class=" text-sm text-slate-50 font-bold align-middle">Home</button>
-                        </div>
-                    </a>
-                    <a href="#" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
-                        <div class="flex flex-row justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-lg min-w-fit">
-                            <img src="../img/bell-solid.svg" class="h-4 w-4 opacity-50" />
-                            <button class=" text-sm text-slate-50 font-bold py-0">Notifications</button>
-                        </div>
-                    </a>
-                    <a href="#" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
-                        <div class="flex flex-row justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-lg min-w-fit">
-                            <img src="../img/message-solid.svg" class="h-3.5 w-3.5 opacity-50" />
-                            <button class=" text-sm text-slate-50 font-bold py-0">Messages</button>
-                        </div>
-                    </a>
-                </div>
+    <header class="navbar">
+        <div class="flex max-w-7xl bg-neutral-800 p-2 justify-between">
+            <!-- Mobile navbar items -->
+            <div class="lg:hidden flex items-center">
+                <i class="fa-solid fa-bars text-green-700 text-2xl hover:brightness-110 hover:cursor-pointer"></i>
             </div>
-            <div class="min-w-fit flex flex-column justify-center">
-                <a href="index.html">
-                    <img class="brightness-125 h-10 w-10 hover:brightness-150 active:brightness-110" src="../img/throw-trash-green.png" alt="Litter logo" />
+
+            <!-- Tablet navbar items -->
+
+            <!-- Desktop navbar items -->
+            <div class="hidden lg:flex justify-evenly space-x-2 items-center">
+                <a href="index.html" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
+                    <div class="flex justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-md items-center">
+                        <img src="../img/house-user-solid.svg" class="h-4 w-4 opacity-50" />
+                        <button class=" text-sm text-slate-50 font-bold">Home</button>
+                    </div>
+                </a>
+                <a href="#" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
+                    <div class="flex justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-md items-center">
+                        <img src="../img/bell-solid.svg" class="h-4 w-4 opacity-50" />
+                        <button class=" text-sm text-slate-50 font-bold">Notifications</button>
+                    </div>
+                </a>
+                <a href="#" class="flex flex-col justify-evenly hover:brightness-110 active:brightness-90">
+                    <div class="flex justify-evenly space-x-1.5 bg-green-700 py-1 px-4 rounded-md items-center">
+                        <img src="../img/message-solid.svg" class="h-3.5 w-3.5 opacity-50" />
+                        <button class=" text-sm text-slate-50 font-bold">Messages</button>
+                    </div>
                 </a>
             </div>
-            <div class="flex flex-col justify-center">
-                <div class="min-w-fit flex flex-row justify-between space-x-2">
-                    <div class="flex flex-col justify-center">
-                        <div class="flex flex-row justify-between space-x-2">
-                            <div class="relative">
-                                <img class="absolute left-2 top-2 h-4 w-4 opacity-25" src="../img/magnifying-glass-solid.svg" />
-                                <input class="w-72 rounded-lg h-8 pl-8 focus:outline-none" type="text" placeholder="Search Litter &#169 - a sh*ttier Twitter"></input>
-                            </div>
-                            <a href="#">
-                                <img class="rounded-lg h-8 w-8 hover:brightness-110 active:brightness-90" src="../img/oscar_pfp.png" alt="Profile picture"/>
-                            </a>
+            <div class="min-w-fit flex items-center">
+                <a href="index.html">
+                    <img class="brightness-125 h-9 w-9 hover:brightness-[1.35] active:brightness-110" src="../img/throw-trash-green.png" alt="Litter logo" />
+                </a>
+            </div>
+            <div class="flex justify-between min-w-fit space-x-2 items-center">
+                <div class="hidden lg:flex relative">
+                    <img class="absolute left-2 top-2 h-4 w-4 opacity-25" src="../img/magnifying-glass-solid.svg" />
+                    <input class="w-72 rounded-md h-7 pl-7 focus:outline-none text-neutral-900" type="text" placeholder="Search Litter &#169 - a sh*ttier Twitter"></input>
+                </div>
+                <a href="#">
+                    <img class="rounded-md h-8 w-8 hover:brightness-110 active:brightness-90" src="../img/oscar_pfp.png" alt="Profile picture"/>
+                </a>
+                <button class="hidden lg:flex bg-green-700 rounded-md text-slate-50 text-lg py-1.5 px-4 font-bold hover:brightness-110 active:brightness-90">Litter</button>
+            </div>
+        </div>
+    </header>
+    <div name="postsSectionContainer" class="flex justify-center pt-8">
+        <div class="flex flex-col justify-between space-y-8">
+            <div name="createPostContainer">
+                <form name="postForm" id="postForm">
+                    <div class="mt-4 p-6 max-w-screen-sm bg-green-700 rounded-md flex justify-between">
+                        <div class="flex flex-col justify-between space-y-2">
+                            <p class="text-slate-50 text-sm font-bold">Litter isn't <span class="italic">THAT</span> bad...</p>
+                            <input name="postInput" id="postInput" type="text" placeholder="Share your garbage takes here!"class="px-2 py-1 w-72 rounded-md focus:outline-none text-sm text-neutral-900"></input>
+                        </div>
+                        <div class="flex flex-col justify-center">
+                            <button type="submit" class="hover:brightness-110 active:brightness-90">
+                                <img src="../img/i-give-you-trash.png" class="h-14 w-14 rounded-md border-2 border-neutral-600 opacity-90" alt="Post icon"/>
+                            </button>
                         </div>
                     </div>
-                    <button class="bg-green-700 rounded-lg text-slate-50 text-lg py-1 px-5 font-bold hover:brightness-110 active:brightness-90">Litter</button>
-                </div>
-            </div>
-        </header>
-    </div>
-    <div class="flex flex-row justify-center pt-4">
-        <div class="flex flex-col justify-between space-y-8">
-            <div class="mt-4 p-6 max-w-screen-sm bg-green-700 rounded-lg flex flex-row justify-between">
-                <div class="flex flex-col justify-between space-y-2">
-                    <p class="text-slate-50 text-sm font-bold">Littering isn't <span class="italic">THAT</span> bad...</p>
-                    <input type="text" placeholder="Share your garbage takes here!"class="px-2 py-1 w-72 rounded-lg focus:outline-none text-sm"></input>
-                </div>
-                <div class="flex flex-col justify-center">
-                    <button class="hover:brightness-110 active:brightness-90">
-                        <img src="../img/i-give-you-trash.png" class="h-14 w-14 rounded-lg border-2 border-neutral-600 opacity-90" alt="Post icon"/>
-                    </button>
-                </div>
+                </form>
             </div>
             <div class="text-2xl text-slate-50 font-bold">
-                Latest Junk
+                <div class="w-3/5 border-b-[1px]">
+                    Latest Posts
+                </div>
             </div>
-            <div name="postsContainer" class="pb-12">
-                <ul name="posts" class="flex flex-col justify-between space-y-8">
-                    <li>
-                        <div class="flex flex-col justify-between space-y-4 p-2 border-green-700 border-2 rounded-lg">
-                            <div class="flex flex-row justify-between">
-                                <h3 class="text-base text-slate-50">Username</h3>
-                                <p class="text-sm text-slate-50">Date</p>
+            <div name="postsContainer" class="pb-16">
+                <div id="posts" name="posts" class="flex flex-col justify-between space-y-8">
+                    <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-md">
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-3 justify-between">
+                                <h3 class="text-base text-slate-100 font-semibold">DefinitelyNotElon2</h3>
+                                <img src="../img/elon.webp" class="h-[1.875rem] w-[1.875rem] rounded-md object-cover"/>
                             </div>
-                            <p class="text-sm text-slate-50 max-w-sm">Garbage take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            <div class="flex flex-row justify-between text-base text-slate-50">
-                                <div class="flex flex-row justify-between space-x-8">
-                                    <i class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
-                                </div>
-                                <i class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
-                            </div>
+                            <p class="text-xs text-slate-300 italic">5/8/23 12:37pm</p>
                         </div>
-                    </li>
-                    <li>
-                        <div class="flex flex-col justify-between space-y-4 p-2 border-green-700 border-2 rounded-lg">
-                            <div class="flex flex-row justify-between">
-                                <h3 class="text-base text-slate-50">Username</h3>
-                                <p class="text-sm text-slate-50">Date</p>
+                        <p class="text-sm text-slate-50 max-w-sm">Take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-50 pt-2.5 items-center">
+                            <div class="flex justify-between space-x-6">
+                                <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                             </div>
-                            <p class="text-sm text-slate-50 max-w-sm">Garbage take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            <div class="flex flex-row justify-between text-base text-slate-50">
-                                <div class="flex flex-row justify-between space-x-8">
-                                    <i class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
-                                </div>
-                                <i class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
-                            </div>
+                            <input type="text" placeholder="Add a comment                           &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-md" />
+                            <i name="edit" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
+                            <i name="delete" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
                         </div>
-                    </li>
-                    <li>
-                        <div class="flex flex-col justify-between space-y-4 p-2 border-green-700 border-2 rounded-lg">
-                            <div class="flex flex-row justify-between">
-                                <h3 class="text-base text-slate-50">Username</h3>
-                                <p class="text-sm text-slate-50">Date</p>
+                    </div>
+
+                    <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-md">
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-3 justify-between">
+                                <h3 class="text-base text-slate-100 font-semibold">DefinitelyNotElon2</h3>
+                                <img src="../img/elon.webp" class="h-[1.875rem] w-[1.875rem] rounded-md object-cover"/>
                             </div>
-                            <p class="text-sm text-slate-50 max-w-sm">Garbage take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
-                            <div class="flex flex-row justify-between text-base text-slate-50">
-                                <div class="flex flex-row justify-between space-x-8">
-                                    <i class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
-                                    <i class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
-                                </div>
-                                <i class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
-                            </div>
+                            <p class="text-xs text-slate-300 italic">5/8/23 12:37pm</p>
                         </div>
-                    </li>
-                </ul>
+                        <p class="text-sm text-slate-50 max-w-sm">Take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-50 pt-2.5 items-center">
+                            <div class="flex justify-between space-x-6">
+                                <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
+                            </div>
+                            <input type="text" placeholder="Add a comment                           &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-md" />
+                            <i name="edit" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
+                            <i name="delete" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-md">
+                        <div class="flex justify-between items-center">
+                            <div class="flex space-x-3 justify-between">
+                                <h3 class="text-base text-slate-100 font-semibold">DefinitelyNotElon2</h3>
+                                <img src="../img/elon.webp" class="h-[1.875rem] w-[1.875rem] rounded-md object-cover"/>
+                            </div>
+                            <p class="text-xs text-slate-300 italic">5/8/23 12:37pm</p>
+                        </div>
+                        <p class="text-sm text-slate-50 max-w-sm">Take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-50 pt-2.5 items-center">
+                            <div class="flex justify-between space-x-6">
+                                <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
+                                <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
+                            </div>
+                            <input type="text" placeholder="Add a comment                           &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-md" />
+                            <i name="edit" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
+                            <i name="delete" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
