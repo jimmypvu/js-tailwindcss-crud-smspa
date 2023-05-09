@@ -1,3 +1,6 @@
+//uuid package import for generating post IDs and user IDs
+const { v4: uuidv4 } = require('uuid');
+
 //form input and rendered post container elements
 let postForm = document.getElementById("postForm");
 let postInput = document.getElementById("postInput");
@@ -47,6 +50,7 @@ let newPostData = {};
 
 let acceptFormData = () => {
     newPostData["text"] = postInput.value;
+    newPostData["post_id"] = uuidv4();
 }
 
 //create new post element with template literal getting value from data object and append to posts container
@@ -76,6 +80,8 @@ let createPost = () => {
     </div>`;
 
     postInput.value = "";
+
+    postsData.push(newPostData);
 }
 
 //delete a post
