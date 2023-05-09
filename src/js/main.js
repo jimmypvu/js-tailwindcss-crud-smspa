@@ -1,4 +1,4 @@
-//form input and rendered post elements
+//form input and rendered post container elements
 let postForm = document.getElementById("postForm");
 let postInput = document.getElementById("postInput");
 let posts = document.getElementById("posts");
@@ -8,22 +8,22 @@ postForm.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log("Submit button clicked");
 
-    formValidation();
+    validateForm();
 });
 
-let formValidation = () => {
+let validateForm = () => {
     let postError = document.getElementById("postFormErrorMessage");
     let timestamp = getTimestamp();
 
-    if(postInput.value == ""){
+    if(postInput.value.trim() == ""){
         console.log("blank post error");
-        postError.innerHTML = "Post cannot be blank!";
+        postError.innerHTML = "Post can't be blank!";
         postError.classList.add("error");
     }else{
         console.log("post success: " + postInput.value);
         postError.innerHTML = "";
         postError.classList.remove("error");
-        acceptData();
+        acceptFormData();
         console.log(timestamp);
         createPost();
     }
@@ -45,11 +45,11 @@ let getTimestamp = () => {
 //get input field data and store in new data object
 let newPostData = {};
 
-let acceptData = () => {
+let acceptFormData = () => {
     newPostData["text"] = postInput.value;
 }
 
-//create new post element with template literal and append to posts container
+//create new post element with template literal getting value from data object and append to posts container
 let createPost = () => {
     posts.innerHTML +=
 
@@ -62,6 +62,7 @@ let createPost = () => {
             <p class="text-xs text-slate-300 font-light italic">${getTimestamp()}</p>
         </div>
         <p name="postBody" class="text-sm text-slate-100 max-w-sm">${newPostData.text}</p>
+        <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
         <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
             <div class="flex justify-between space-x-6">
                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
@@ -69,8 +70,8 @@ let createPost = () => {
                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
             </div>
             <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
-            <i name="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
-            <i name="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
+            <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
+            <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
         </div>
     </div>`;
 
@@ -87,32 +88,78 @@ let editPost = (e) => {
     let post = e.parentElement.parentElement; 
     let postBody = post.querySelector("p[name='postBody']");
     let postBodyHeight = postBody.offsetHeight;
-    console.log(postBody.textContent);
-    console.log(postBodyHeight + " px");
-    let textEditBox = document.createElement("textarea");
-    textEditBox.value = postBody.textContent;
-    textEditBox.className = "scrollbar-hide resize-none focus:outline-none rounded-[0.25rem] text-sm text-neutral-900 p-2";
-    textEditBox.style.height = `${postBodyHeight/16}rem`;
-    // textEditBox.rows = postBody.clientHeight/20;
-    // textEditBox.cols = postBody.clientWidth/10;
-    postBody.replaceWith(textEditBox);
 
-    textEditBox.focus();
-    textEditBox.selectionStart = textEditBox.selectionEnd;
+    // console.log(postBody.textContent);
+    // console.log(postBodyHeight);
+
+    let textareaEdit = document.createElement("textarea");
+    textareaEdit.value = postBody.textContent;
+    textareaEdit.className = "scrollbar-hide resize-none focus:outline-none rounded-[0.25rem] text-sm text-neutral-900 p-2";
+    textareaEdit.style.height = `${postBodyHeight/16}rem`;
+    textareaEdit.name = "editBox";
+    textareaEdit.setAttribute("required", true);
+    // textareaEdit.rows = postBody.clientHeight/20;
+    // textareaEdit .cols = postBody.clientWidth/10;
+
+    postBody.replaceWith(textareaEdit);
+
+    textareaEdit.focus();
+    textareaEdit.selectionStart = textareaEdit.selectionEnd;
 
     let editIcon = post.querySelector("#edit");
-    let discardIcon = post.querySelector("#delete");
+    let deleteIcon = post.querySelector("#delete");
 
     editIcon.className = "fa-solid fa-check hover:text-green-700 hover:cursor-pointer";
+    deleteIcon.className = "fa-solid fa-xmark hover:text-red-600 hover:cursor-pointer";
+
     editIcon.setAttribute("onclick", "confirmEdit(this)");
-    discardIcon.className = "fa-solid fa-xmark hover:text-red-600 hover:cursor-pointer";
-    discardIcon.setAttribute("onclick", "discardEdit(this)");
+    deleteIcon.setAttribute("onclick", "discardEdit(this)");
 }
 
 let confirmEdit = (e) => {
-    console.log("Edit approved")
+    // console.log("Edit approved")
+    let post = e.parentElement.parentElement;
+    let edit = post.querySelector("textarea[name='editBox']");
+
+    if(validateEdit(edit)){
+        let postEle = document.createElement("p");
+        postEle.setAttribute("name", "postBody");
+        postEle.className = "text-sm text-slate-100 max-w-sm";
+        postEle.innerHTML = edit.value;
+
+        edit.replaceWith(postEle);
+        console.log(postEle.innerHTML)
+        let confirmIcon = post.querySelector("#edit");
+        let discardIcon = post.querySelector("#delete");
+
+        confirmIcon.className = "fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer";
+        discardIcon.className = "fas fa-trash hover:text-neutral-600 hover:cursor-pointer";
+
+        confirmIcon.setAttribute("onclick", "editPost(this)");
+        discardIcon.setAttribute("onclick", "deletePost(this)");
+    };
 }
 
-let discardEdit = (e) => {
+let validateEdit = (edit) => {
+    let post = edit.parentElement;
+    let editBody = post.querySelector("textarea[name='editBox']")
+    let editMessage = post.querySelector("span[name='editValidationMessage']")
+
+    if(editBody.value.trim() == ""){
+        console.log("edit cannot be blank")
+        editMessage.innerHTML = "Edit cannot be blank"
+        editBody.focus();
+        editBody.selectionStart = editBody.selectionEnd
+        return false;
+    }else{
+        console.log("valid edit")
+        editMessage.innerHTML = "";
+        return true;
+    }
+}
+
+let discardEdit = (edit) => {
     console.log("Edit discarded")
+    let post = edit.parentElement;
+    let editBody = post.querySelector("textarea[name='editBox']")
 }
