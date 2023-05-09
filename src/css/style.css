@@ -1,4 +1,31 @@
+/**Tailwind directives, FA import, Google fonts**/
 @import '@fortawesome/fontawesome-free/css/all.css';
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @tailwind base;
+/** Fonts **/
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+.brand-font {
+    font-family: 'Darumadrop One', cursive;
+}
+
+/** Hide scrollbar **/
+/** For Chrome **/
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.error {
+    display: inline-block;
+}
+
 @tailwind components;
 @tailwind utilities;
+

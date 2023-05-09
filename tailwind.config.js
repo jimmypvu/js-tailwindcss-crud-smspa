@@ -14,6 +14,11 @@ module.exports = {
       'lg': '1028px',
       // => @media (min-width: 1028px) { ... }
     },
+    //don't need to change tailwind config if importing fonts into css
+    // fontFamily:{
+    //   display: ['Darumadrop One', 'cursive'],
+    //   display: ['Inter', 'sans-serif']
+    // },
     extend: {},
   },
   plugins: [
