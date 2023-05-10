@@ -139,7 +139,7 @@ let deletePost = (e) => {
     postsData.splice(postIndex, 1);
     post.remove();
     localStorage.setItem("posts", JSON.stringify(postsData));
-    renderPosts(postsData);
+    // renderPosts(postsData);
 }
 
 //edit a post
