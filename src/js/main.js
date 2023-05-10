@@ -31,12 +31,17 @@ let validateForm = () => {
 let newPostData = {};
 
 let acceptFormData = () => {
+    //create new post object
     let newPost = {post_id: generatePostId(), text: postInput.value, likes: 0, created_on: getTimestamp(), edited_on: null};
 
+    //add to postsData array
     postsData.push(newPost);
-    postInput.value = "";
-
+    
+    //store updated postsData array in localstorage
     localStorage.setItem("posts", JSON.stringify(postsData));
+
+    //reset input value
+    postInput.value = "";
 }
 
 //on page load check for any existing/saved posts and load posts if any
@@ -52,8 +57,10 @@ window.onload = () => {
 
 //render all posts in postsData to page
 let renderPosts = (postsData) => {
+    //clear existing html in posts container
     postsContainer.innerHTML = "";
 
+    //loop through each post item in posts array and append post html to postsContainer
     postsData.forEach((post, index) => {
         //dynamically add spacing if first post in array to offset flex-col-reverse
         let firstPostMargin = index === 0 ? "mt-8" : "";
