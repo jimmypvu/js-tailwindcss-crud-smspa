@@ -47,7 +47,7 @@ window.onload = () => {
       postsData = JSON.parse(savedPostsData);
     }
 
-    renderPosts(postsData);
+    // renderPosts(postsData);
 }
 
 //render all posts in postsData to page
@@ -55,12 +55,12 @@ let renderPosts = (postsData) => {
     postsContainer.innerHTML = "";
 
     postsData.forEach((post, index) => {
-        //add spacing if first post in array to offset flex-col-reverse
-        let firstPostClass = index === 0 ? "mt-8" : "";
+        //dynamically add spacing if first post in array to offset flex-col-reverse
+        let firstPostMargin = index === 0 ? "mt-8" : "";
 
         postsContainer.innerHTML += 
 
-        `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostClass}">
+        `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
             <div class="flex justify-between items-center">
                 <div class="flex space-x-3 justify-between items-center">
                     <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
@@ -76,7 +76,7 @@ let renderPosts = (postsData) => {
                     <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                     <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                 </div>
-                <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+                <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
                 <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                 <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
             </div>
@@ -123,7 +123,7 @@ let createPost = () => {
                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
             </div>
-            <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+            <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
             <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
             <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
         </div>

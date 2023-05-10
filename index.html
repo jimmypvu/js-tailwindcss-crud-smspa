@@ -47,7 +47,7 @@
             <div class="flex justify-between min-w-fit space-x-2 items-center">
                 <div class="hidden lg:flex relative">
                     <img class="absolute left-1.5 top-[0.4375rem] h-3.5 w-3.5 opacity-25" src="img/magnifying-glass-solid.svg" />
-                    <input class="w-[15rem] rounded-[0.25rem] h-7 pl-[1.625rem] focus:outline-none text-neutral-900 text-xs" type="text" placeholder="Search Litter&reg - a sh*ttier Twitter"></input>
+                    <input name="search" class="w-[15rem] rounded-[0.25rem] h-7 pl-[1.625rem] focus:outline-none text-neutral-900 text-xs" type="text" placeholder="Search Litter&reg - a sh*ttier Twitter"></input>
                 </div>
                 <a href="#">
                     <img class="rounded-[0.25rem] h-7 w-7 hover:brightness-110 active:brightness-90" src="img/oscar_pfp.png" alt="Profile picture"/>
@@ -69,9 +69,9 @@
                         </div>
 
                         <div class="flex flex-col justify-center">
-                            <button type="submit" class="brightness-[1.2] hover:brightness-[1.4] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70" alt="Post button"/>
+                            <button id="postSubmit" type="submit" class="brightness-[1.2] hover:brightness-[1.4] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70" alt="Post button"/>
                             </button>
-                            <p class="text-sm text-slate-100 flex justify-center brand-font hover-hide">Post!</p>
+                            <p class="text-base text-slate-100 flex justify-center brand-font">Post!</p>
                         </div>
                     </div>
                 </form>
@@ -108,7 +108,7 @@
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                             </div>
-                            <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+                            <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
                             <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                             <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
                         </div>
@@ -130,7 +130,7 @@
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                             </div>
-                            <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+                            <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
                             <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                             <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
                         </div>
@@ -152,7 +152,7 @@
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                             </div>
-                            <input type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+                            <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />                     
                             <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                             <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
                         </div>
