@@ -68,14 +68,14 @@ let renderPosts = (postsData) => {
         `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
             <div class="flex justify-between items-center">
                 <div class="flex space-x-3 justify-between items-center">
-                    <h3 class="text-lg text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
+                    <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
                     <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
                 </div>
                 <p class="text-xs text-slate-300 font-light italic">${post.created_on}</p>
             </div>
             <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${post.text}</p>
             <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-            <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
+            <div class="flex justify-between space-x-4 text-base text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                 <div class="flex justify-between space-x-6">
                     <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                     <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
@@ -122,7 +122,7 @@ let createPost = () => {
         </div>
         <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${newPostData.text}</p>
         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
+        <div class="flex justify-between space-x-4 text-base text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
             <div class="flex justify-between space-x-6">
                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
