@@ -64,7 +64,7 @@ let renderPosts = (postsData) => {
             <div class="flex justify-between items-center">
                 <div class="flex space-x-3 justify-between items-center">
                     <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
-                    <img src="../img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
+                    <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
                 </div>
                 <p class="text-xs text-slate-300 font-light italic">${post.created_on}</p>
             </div>
@@ -111,7 +111,7 @@ let createPost = () => {
         <div class="flex justify-between items-center">
             <div class="flex space-x-3 justify-between items-center">
                 <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
-                <img src="../img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
+                <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
             </div>
             <p class="text-xs text-slate-300 font-light italic">${getTimestamp()}</p>
         </div>
