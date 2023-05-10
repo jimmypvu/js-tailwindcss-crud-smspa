@@ -34,14 +34,12 @@ let acceptFormData = () => {
     //create new post object
     let newPost = {post_id: generatePostId(), text: postInput.value, likes: 0, created_on: getTimestamp(), edited_on: null};
 
-    //add to postsData array
+    //add to postsData array and reset input value
     postsData.push(newPost);
-    
+    postInput.value = "";
+
     //store updated postsData array in localstorage
     localStorage.setItem("posts", JSON.stringify(postsData));
-
-    //reset input value
-    postInput.value = "";
 }
 
 //on page load check for any existing/saved posts and load posts if any
@@ -52,7 +50,7 @@ window.onload = () => {
       postsData = JSON.parse(savedPostsData);
     }
 
-    // renderPosts(postsData);
+    renderPosts(postsData);
 }
 
 //render all posts in postsData to page
@@ -70,14 +68,14 @@ let renderPosts = (postsData) => {
         `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
             <div class="flex justify-between items-center">
                 <div class="flex space-x-3 justify-between items-center">
-                    <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
+                    <h3 class="text-lg text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
                     <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
                 </div>
                 <p class="text-xs text-slate-300 font-light italic">${post.created_on}</p>
             </div>
-            <p name="postBody" class="text-sm text-slate-100 max-w-sm">${post.text}</p>
+            <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${post.text}</p>
             <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-            <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
+            <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                 <div class="flex justify-between space-x-6">
                     <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                     <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
@@ -122,9 +120,9 @@ let createPost = () => {
             </div>
             <p class="text-xs text-slate-300 font-light italic">${getTimestamp()}</p>
         </div>
-        <p name="postBody" class="text-sm text-slate-100 max-w-sm">${newPostData.text}</p>
+        <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${newPostData.text}</p>
         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
+        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
             <div class="flex justify-between space-x-6">
                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
@@ -146,7 +144,7 @@ let deletePost = (e) => {
     postsData.splice(postIndex, 1);
     post.remove();
     localStorage.setItem("posts", JSON.stringify(postsData));
-    // renderPosts(postsData);
+    renderPosts(postsData);
 }
 
 //edit a post
@@ -159,6 +157,7 @@ let editPost = (e) => {
     textareaEdit.value = postBody.textContent;
     textareaEdit.className = "scrollbar-hide resize-none focus:outline-none rounded-[0.25rem] text-sm text-neutral-900 p-2";
     textareaEdit.style.height = `${postBodyHeight/16}rem`;
+    textareaEdit.setAttribute("maxlength", "420");
     textareaEdit.name = "editBox";
     // textareaEdit.rows = postBody.clientHeight/20;
     // textareaEdit.cols = postBody.clientWidth/10;
@@ -185,13 +184,13 @@ let confirmEdit = (e) => {
     if(validateEdit(edit)){
         let postEle = document.createElement("p");
         postEle.setAttribute("name", "postBody");
-        postEle.className = "text-sm text-slate-100 max-w-sm";
+        postEle.className = "text-sm text-slate-100 max-w-sm long-string-wrap pl-1";
         postEle.innerHTML = edit.value;
 
         edit.replaceWith(postEle);
         // console.log(postEle.innerHTML)
 
-        //update post values for post object in postsData array and save to local storage after successful edit
+        //update post values for post object in postsData array and save to localstorage after successful edit
         let postIndex = Array.from(postsContainer.children).indexOf(post);
         postsData[postIndex].text = edit.value;
         postsData[postIndex].edited_on = getTimestamp();
@@ -233,7 +232,7 @@ let discardEdit = (edit) => {
 
     let postEle = document.createElement("p");
     postEle.setAttribute("name", "postBody");
-    postEle.className = "text-sm text-slate-100 max-w-sm";
+    postEle.className = "text-sm text-slate-100 max-w-sm long-string-wrap pl-1";
     postEle.innerHTML = postsData[postIndex].text;
 
     editEle.replaceWith(postEle);

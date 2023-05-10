@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Litter - Where Twitter is Heading</title>
+    <!--Tailwind generated CSS-->
     <link href="dist/output.css" type="text/css" rel="stylesheet">
-    <!-- <link rel="stylesheet" type="text/css" href="node_modules/@fortawesome/fontawesome-free/css/all.css"> -->
-    <script src="https://kit.fontawesome.com/66521e49b4.js" crossorigin="anonymous"></script>
+    <!--Font Awesome 6.4-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!--Google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-800">
     <header class="navbar">
@@ -57,7 +62,8 @@
             </div>
         </div>
     </header>
-    <div name="postsSectionContainer" class="flex justify-center pt-12">
+
+    <div name="postsSectionContainer" class="flex justify-center pt-8">
         <div class="flex flex-col justify-between space-y-4">
 
             <div name="createPostContainer" class="focus:outline-none min-w-[432px]">
@@ -65,14 +71,14 @@
                 <form name="postForm" id="postForm">
                     <div class="mt-4 p-6 max-w-screen-sm bg-green-700 rounded-[0.25rem] flex justify-between space-x-4">
                         <div class="flex flex-col justify-between space-y-2">
-                            <h3 class="text-slate-100 text-xl font-bold brand-font">Littering isn't <span class="italic brand-font">that</span> bad...</h3>
-                            <textarea name="postInput" id="postInput" type="text" placeholder="Share your next garbage take here"class="px-2 py-1 w-72 rounded-[0.25rem] focus:outline-none text-sm text-neutral-900 resize-none h-24 scrollbar-hide" maxlength="420"></textarea>
+                            <h3 class="text-slate-100 text-xl font-bold brand-font hover:cursor-default cursor-default">Littering isn't <span class="italic brand-font">that</span> bad...</h3>
+                            <textarea name="postInput" id="postInput" type="text" placeholder="Share your next garbage take here!"class="px-2 py-1 w-72 rounded-[0.25rem] focus:outline-none text-sm text-neutral-900 resize-none h-24 scrollbar-hide" maxlength="420"></textarea>
                         </div>
 
                         <div class="flex flex-col justify-center">
-                            <button id="postSubmit" type="submit" class="brightness-[1.2] hover:brightness-[1.4] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70" alt="Post button"/>
+                            <button id="postSubmit" type="submit" class="brightness-[1.15] hover:brightness-[1.35] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70" alt="Post button"/>
                             </button>
-                            <p class="text-base text-slate-100 flex justify-center brand-font">Post!</p>
+                            <p class="text-base text-slate-100 flex justify-center brand-font hover:cursor-default cursor-default">Post!</p>
                         </div>
                     </div>
                 </form>
@@ -84,16 +90,16 @@
                 </div>
             </div>
 
-            <div class="text-2xl text-slate-100 font-bold pt-6">
-                <div class="w-3/5 border-b-[1px] brand-font">
+            <div class="text-2xl text-slate-200 font-bold pt-7">
+                <div class="w-3/5 border-b-[1px] brand-font hover:cursor-default cursor-default">
                     Latest Posts
                 </div>
             </div>
 
-            <div name="postsContainer" class="pb-12 min-w-full">
+            <div name="postsContainer" class="pb-12">
                 <div id="posts" name="posts" class="flex flex-col-reverse justify-between space-y-8">
 
-                    <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] mt-8">
+                    <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem]">
                         <div class="flex justify-between items-center">
                             <div class="flex space-x-3 justify-between items-center">
                                 <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
@@ -101,9 +107,9 @@
                             </div>
                             <p class="text-xs text-slate-300 font-light italic">5/8/23 at 10:14am, Mon</p>
                         </div>
-                        <p name="postBody" class="text-sm text-slate-100 max-w-sm">Take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">Take #1: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
                         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                             <div class="flex justify-between space-x-6">
                                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
@@ -123,9 +129,9 @@
                             </div>
                             <p class="text-xs text-slate-300 font-light italic">5/8/23 2:42pm, Mon</p>
                         </div>
-                        <p name="postBody" class="text-sm text-slate-100 max-w-sm">Take #2: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">Take #2: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
                         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                             <div class="flex justify-between space-x-6">
                                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
@@ -145,9 +151,9 @@
                             </div>
                             <p class="text-xs text-slate-300 font-light italic">5/8/23 at 9:37pm, Mon</p>
                         </div>
-                        <p name="postBody" class="text-sm text-slate-100 max-w-sm">Take #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+                        <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">Take #3: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
                         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-2.5 items-center">
+                        <div class="flex justify-between space-x-4 text-lg text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                             <div class="flex justify-between space-x-6">
                                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
                                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
