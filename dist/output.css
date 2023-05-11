@@ -1122,14 +1122,26 @@ video {
     width: 24rem;
   }
 
+  .sm\:w-80 {
+    width: 20rem;
+  }
+
   .sm\:min-w-full {
     min-width: 100%;
+  }
+
+  .sm\:flex-row-reverse {
+    flex-direction: row-reverse;
   }
 }
 
 @media (min-width: 768px) {
   .md\:w-\[14rem\] {
     width: 14rem;
+  }
+
+  .md\:flex-row-reverse {
+    flex-direction: row-reverse;
   }
 }
 
