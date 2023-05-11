@@ -48,7 +48,7 @@ let renderPosts = (postsData) => {
         let firstPostMargin = index === 0 ? "mt-8" : "";
         //lg:w-[14rem] w-3/4 on comment input
         let postHTML = `
-        <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin} sm:min-w-full sm:w-80">
+        <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin} sm:min-w-full sm:w-96">
             <div class="lg:flex justify-between items-center">
                 <div class="flex space-x-3 lg:justify-between justify-start items-center">
                     <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
