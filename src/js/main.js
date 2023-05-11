@@ -46,11 +46,11 @@ let renderPosts = (postsData) => {
     postsData.forEach((post, index) => {
         //dynamically add spacing if first post in array to offset flex-col-reverse
         let firstPostMargin = index === 0 ? "mt-8" : "";
-
+        //lg:w-[14rem] w-3/4 on comment input
         let postHTML = `
-        <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
-            <div class="flex justify-between items-center">
-                <div class="flex space-x-3 justify-between items-center">
+        <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin} sm:min-w-full sm:w-96">
+            <div class="lg:flex justify-between items-center">
+                <div class="flex space-x-3 lg:justify-between justify-start items-center">
                     <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
                     <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
                 </div>
@@ -64,7 +64,7 @@ let renderPosts = (postsData) => {
                     <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
                     <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
                 </div>
-                <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 lg:w-[14rem] w-3/4 focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+                <input name="commentInput" type="text" placeholder="Add a comment                   &#9166" class="h-6 w-[14rem] sm:hidden focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
                 <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                 <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
             </div>
