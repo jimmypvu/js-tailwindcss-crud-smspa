@@ -47,9 +47,8 @@ let renderPosts = (postsData) => {
         //dynamically add spacing if first post in array to offset flex-col-reverse
         let firstPostMargin = index === 0 ? "mt-8" : "";
 
-        postsContainer.innerHTML += 
-
-        `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
+        let postHTML = `
+        <div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${firstPostMargin}">
             <div class="flex justify-between items-center">
                 <div class="flex space-x-3 justify-between items-center">
                     <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
@@ -57,7 +56,7 @@ let renderPosts = (postsData) => {
                 </div>
                 <p class="text-xs text-slate-300 font-light italic">${post.created_on}</p>
             </div>
-            <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${post.text}</p>
+            <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1"></p>
             <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
             <div class="flex justify-between space-x-4 text-base text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
                 <div class="flex justify-between space-x-6">
@@ -69,7 +68,33 @@ let renderPosts = (postsData) => {
                 <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
                 <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
             </div>
-        </div>`;
+        </div>
+        `;
+
+        //sanitize input text before rendering to dom to prevent html from being rendered / xss attacks
+        let sanitizedInput = DOMPurify.sanitize(post.text, {
+            ALLOWED_TAGS: [],
+            ALLOWED_ATTR: [],
+            ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|xxx|mms|ftp|ssh|file|data):|[^a-z]|[a-z+.\-]+(?:[^a-z+.\-:]|$))/i,
+            ALLOW_DATA_ATTR: false,
+            ALLOW_UNKNOWN_PROTOCOLS: false,
+            KEEP_CONTENT: true,
+            RETURN_DOM_FRAGMENT: false,
+            RETURN_DOM: false,
+            RETURN_TRUSTED_TYPE: false,
+            WHOLE_DOCUMENT: false,
+            SAFE_FOR_TEMPLATES: true,
+            FORBID_TAGS: ["script", "style"],
+            FORBID_ATTR: ["style", "on*"],
+            FORCE_BODY: false,
+            SANITIZE_DOM: true,
+        });
+
+        //can't directly concatenate post html to postsContainer innerHTML or you can render added html from the text input, create a new div element, set textContent instead of innerHTML to the post's 'text' value, and append the resulting child of the new container ele
+        let postContainer = document.createElement("div");
+        postContainer.innerHTML = postHTML.trim();
+        postContainer.querySelector("[name='postBody']").textContent = sanitizedInput;
+        postsContainer.append(postContainer.firstChild);
     })
 }
 
@@ -173,7 +198,7 @@ let confirmEdit = (e) => {
         let postEle = document.createElement("p");
         postEle.setAttribute("name", "postBody");
         postEle.className = "text-sm text-slate-100 max-w-sm long-string-wrap pl-1";
-        postEle.innerText = edit.value;
+        postEle.innerText = edit.value.trim();
 
         edit.replaceWith(postEle);
         // console.log(postEle.innerHTML)
