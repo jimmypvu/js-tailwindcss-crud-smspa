@@ -3,7 +3,7 @@ let postForm = document.getElementById("postForm");
 let postInput = document.getElementById("postInput");
 let postsContainer = document.getElementById("posts");
 
-//form submit listener and form validation
+//form submit event listener and form validation
 postForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -14,22 +14,17 @@ let validateForm = () => {
     let postError = document.getElementById("postFormErrorMessage");
 
     if(postInput.value.trim() == ""){
-        // console.log("blank post error");
-        postError.innerHTML = "Post can't be blank!";
-        postError.classList.add("error");
+        postError.innerText = "Post can't be blank!";
     }else{
-        // console.log("post success: " + postInput.value);
-        postError.innerHTML = "";
-        postError.classList.remove("error");
         acceptFormData();
-        // createPost();
         renderPosts(postsData);
+        postError.innerText = "";
+        //resize create post textarea back to original
+        // postInput.style = "";
     }
 }
 
-//get input field data and store in new data object, push new post data to postsData array in posts.js, save posts data in local storage for now until db layer is added
-let newPostData = {};
-
+//get new post / input field data and store in new post object, push object to postsData array in posts.js, save posts data in local storage for now until db layer is added
 let acceptFormData = () => {
     //create new post object
     let newPost = {post_id: generatePostId(), text: postInput.value, likes: 0, created_on: getTimestamp(), edited_on: null};
@@ -40,17 +35,6 @@ let acceptFormData = () => {
 
     //store updated postsData array in localstorage
     localStorage.setItem("posts", JSON.stringify(postsData));
-}
-
-//on page load check for any existing/saved posts and load posts if any
-window.onload = () => {
-    let savedPostsData = localStorage.getItem("posts");
-
-    if (savedPostsData) {
-      postsData = JSON.parse(savedPostsData);
-    }
-
-    renderPosts(postsData);
 }
 
 //render all posts in postsData to page
@@ -108,33 +92,20 @@ let generatePostId = () => {
     return `${timestamp}-${random}`
 }
 
-//create new post element with template literal getting value from data object and append to posts container
-let createPost = () => {
-    postsContainer.innerHTML +=
+//event listener to resize textarea input for create post
+// postInput.addEventListener("input", () => {
+//     postInput.style.height = "auto";
+//     postInput.style.minHeight = "6rem";
+//     postInput.style.height = `${postInput.scrollHeight/16}rem`;
+// });
 
-    `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${postsContainer.childElementCount === 0 ? 'mt-8' : ''}">
-        <div class="flex justify-between items-center">
-            <div class="flex space-x-3 justify-between items-center">
-                <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
-                <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
-            </div>
-            <p class="text-xs text-slate-300 font-light italic">${getTimestamp()}</p>
-        </div>
-        <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${newPostData.text}</p>
-        <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
-        <div class="flex justify-between space-x-4 text-base text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
-            <div class="flex justify-between space-x-6">
-                <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
-                <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
-                <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
-            </div>
-            <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
-            <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
-            <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
-        </div>
-    </div>`;
-
-    postInput.value = "";
+//on page load check for any existing/saved posts and load posts if any
+window.onload = () => {
+    let savedPostsData = localStorage.getItem("posts");
+    if (savedPostsData) {
+      postsData = JSON.parse(savedPostsData);
+    }
+    renderPosts(postsData);
 }
 
 //delete a post
@@ -151,29 +122,46 @@ let deletePost = (e) => {
 let editPost = (e) => {
     let post = e.parentElement.parentElement; 
     let postBody = post.querySelector("p[name='postBody']");
-    let postBodyHeight = postBody.offsetHeight;
 
     let textareaEdit = document.createElement("textarea");
-    textareaEdit.value = postBody.textContent;
+    textareaEdit.value = postBody.innerText;
     textareaEdit.className = "scrollbar-hide resize-none focus:outline-none rounded-[0.25rem] text-sm text-neutral-900 p-2";
-    textareaEdit.style.height = `${postBodyHeight/16}rem`;
+    textareaEdit.rows = postBody.clientHeight/20;
+    textareaEdit.cols = postBody.clientWidth/10;
+    // textareaEdit.style.height = `${postBody.clientHeight/16}rem`;
     textareaEdit.setAttribute("maxlength", "420");
     textareaEdit.name = "editBox";
-    // textareaEdit.rows = postBody.clientHeight/20;
-    // textareaEdit.cols = postBody.clientWidth/10;
+
+    // event listener for input event, resize textarea as user inputs more/less text
+    textareaEdit.addEventListener("input", () => {
+        textareaEdit.style.height = "auto";
+        textareaEdit.style.height = `${textareaEdit.scrollHeight}px`;
+    });
 
     postBody.replaceWith(textareaEdit);
 
     textareaEdit.focus();
     textareaEdit.selectionStart = textareaEdit.selectionEnd;
 
-    //change edit & delete icons
+    //change edit & delete icons and onclick to confirm and discard icons and confirmEdit/discardEdit onclick
+    toggleEditDeleteIcons(post);
+}
+
+let toggleEditDeleteIcons = (post) => {
     let editIcon = post.querySelector("#edit");
     let deleteIcon = post.querySelector("#delete");
-    editIcon.className = "fa-solid fa-check hover:text-green-700 hover:cursor-pointer";
-    deleteIcon.className = "fa-solid fa-xmark hover:text-red-600 hover:cursor-pointer";
-    editIcon.setAttribute("onclick", "confirmEdit(this)");
-    deleteIcon.setAttribute("onclick", "discardEdit(this)");
+
+    if(editIcon.getAttribute("onclick") === "editPost(this)"){
+        editIcon.className = "fa-solid fa-check hover:text-green-700 hover:cursor-pointer";
+        deleteIcon.className = "fa-solid fa-xmark hover:text-red-600 hover:cursor-pointer";
+        editIcon.setAttribute("onclick", "confirmEdit(this)");
+        deleteIcon.setAttribute("onclick", "discardEdit(this)");
+    }else{
+        editIcon.className = "fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer";
+        deleteIcon.className = "fas fa-trash hover:text-neutral-600 hover:cursor-pointer";
+        editIcon.setAttribute("onclick", "editPost(this)");
+        deleteIcon.setAttribute("onclick", "deletePost(this)");
+    }
 }
 
 let confirmEdit = (e) => {
@@ -185,7 +173,7 @@ let confirmEdit = (e) => {
         let postEle = document.createElement("p");
         postEle.setAttribute("name", "postBody");
         postEle.className = "text-sm text-slate-100 max-w-sm long-string-wrap pl-1";
-        postEle.innerHTML = edit.value;
+        postEle.innerText = edit.value;
 
         edit.replaceWith(postEle);
         // console.log(postEle.innerHTML)
@@ -196,13 +184,8 @@ let confirmEdit = (e) => {
         postsData[postIndex].edited_on = getTimestamp();
         localStorage.setItem("posts", JSON.stringify(postsData));
 
-        //update edit & delete icons
-        let confirmIcon = post.querySelector("#edit");
-        let discardIcon = post.querySelector("#delete");
-        confirmIcon.className = "fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer";
-        discardIcon.className = "fas fa-trash hover:text-neutral-600 hover:cursor-pointer";
-        confirmIcon.setAttribute("onclick", "editPost(this)");
-        discardIcon.setAttribute("onclick", "deletePost(this)");
+        //update edit & delete icons and onclick
+        toggleEditDeleteIcons(post);
     };
 }
 
@@ -213,13 +196,13 @@ let validateEdit = (edit) => {
 
     if(editBody.value.trim() == ""){
         // console.log("edit cannot be blank")
-        editMessage.innerHTML = "Edit cannot be blank"
+        editMessage.innerText = "Edit cannot be blank"
         editBody.focus();
         editBody.selectionStart = editBody.selectionEnd
         return false;
     }else{
         // console.log("valid edit")
-        editMessage.innerHTML = "";
+        editMessage.innerText = "";
         return true;
     }
 }
@@ -229,20 +212,49 @@ let discardEdit = (edit) => {
     let post = edit.parentElement.parentElement;
     let editEle = post.querySelector("textarea[name='editBox']");
     let postIndex = Array.from(postsContainer.children).indexOf(post);
+    let editMessage = post.querySelector("span[name='editValidationMessage']")
 
     let postEle = document.createElement("p");
     postEle.setAttribute("name", "postBody");
     postEle.className = "text-sm text-slate-100 max-w-sm long-string-wrap pl-1";
-    postEle.innerHTML = postsData[postIndex].text;
+    postEle.innerText = postsData[postIndex].text;
 
     editEle.replaceWith(postEle);
     // console.log(postEle.innerHTML)
 
     //reset edit & delete icons
-    let confirmIcon = post.querySelector("#edit");
-    let discardIcon = post.querySelector("#delete");
-    confirmIcon.className = "fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer";
-    discardIcon.className = "fas fa-trash hover:text-neutral-600 hover:cursor-pointer";
-    confirmIcon.setAttribute("onclick", "editPost(this)");
-    discardIcon.setAttribute("onclick", "deletePost(this)");
+    toggleEditDeleteIcons(post);
+
+    editMessage.innerText = "";
 }
+
+
+//create new post element with template literal getting value from data object and append to posts container (moved to renderPosts() method)
+// let newPostData = {};
+// let createPost = () => {
+//     postsContainer.innerHTML +=
+
+//     `<div class="flex flex-col justify-between space-y-3 p-2.5 border-green-700 border-2 rounded-[0.25rem] ${postsContainer.childElementCount === 0 ? 'mt-8' : ''}">
+//         <div class="flex justify-between items-center">
+//             <div class="flex space-x-3 justify-between items-center">
+//                 <h3 class="text-base text-slate-200 font-semibold brand-font">DefinitelyNotElon2</h3>
+//                 <img src="img/elon.webp" class="h-7 w-7 rounded-[0.25rem] object-cover"/>
+//             </div>
+//             <p class="text-xs text-slate-300 font-light italic">${getTimestamp()}</p>
+//         </div>
+//         <p name="postBody" class="text-sm text-slate-100 max-w-sm long-string-wrap pl-1">${newPostData.text}</p>
+//         <span name="editValidationMessage" class="text-xs text-red-600 px-1"></span>
+//         <div class="flex justify-between space-x-4 text-base text-slate-100 border-t-[1px] border-slate-100 pt-3 items-center pb-1">
+//             <div class="flex justify-between space-x-6">
+//                 <i name="like" class="fas fa-heart hover:text-green-700 hover:cursor-pointer"></i>
+//                 <i name="repost" class="fas fa-recycle hover:text-green-700 hover:cursor-pointer"></i>
+//                 <i name="viewComments" class="fas fa-comment hover:text-green-700 hover:cursor-pointer"></i>
+//             </div>
+//             <input name="commentInput" type="text" placeholder="Add a comment                       &#9166" class="h-6 w-[14rem] focus:outline-none text-neutral-900 text-sm pl-2 rounded-[0.25rem]" />
+//             <i id="edit" onclick="editPost(this)" class="fa-solid fa-pen-to-square hover:text-green-700 hover:cursor-pointer"></i>
+//             <i id="delete" onclick="deletePost(this)" class="fas fa-trash hover:text-neutral-600 hover:cursor-pointer"></i>
+//         </div>
+//     </div>`;
+
+//     postInput.value = "";
+// }
