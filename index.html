@@ -68,17 +68,17 @@
     <div name="postsSectionContainer" class="flex justify-center pt-8">
         <div class="flex flex-col justify-between space-y-4">
             <!--minwidth432px-->
-            <div name="createPostContainer" class="focus:outline-none">
+            <div name="createPostContainer" class="focus:outline-none w-full">
 
-                <form name="postForm" id="postForm"><!--added mx-4-->
+                <form name="postForm" id="postForm"><!--added mx-4 on div, removed w-72 on textarea, lg and sm added-->
                     <div class="mt-4 p-6 max-w-screen-sm mx-4 bg-green-700 rounded-[0.25rem] flex justify-between space-x-4">
                         <div class="flex flex-col justify-between space-y-2">
                             <h3 class="text-slate-100 text-xl font-bold brand-font hover:cursor-default cursor-default">Littering isn't <span class="italic brand-font">that</span> bad...</h3>
-                            <textarea name="postInput" id="postInput" type="text" placeholder="Share your next garbage take here!"class="px-2 py-1 w-72 rounded-[0.25rem] focus:outline-none text-sm text-neutral-900 resize-none h-24 scrollbar-hide" maxlength="420"></textarea>
+                            <textarea name="postInput" id="postInput" type="text" placeholder="Share your next garbage take here!"class="px-2 py-1 lg:w-72 sm:w-3/4 rounded-[0.25rem] focus:outline-none text-sm text-neutral-900 resize-none h-24 scrollbar-hide" maxlength="420"></textarea>
                         </div>
 
-                        <div class="flex flex-col justify-end">
-                            <button id="postSubmit" type="submit" class="brightness-[1.15] hover:brightness-[1.35] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70" alt="Post button"/>
+                        <div class="flex flex-col justify-end"><!--object-contain to img-->
+                            <button id="postSubmit" type="submit" class="brightness-[1.15] hover:brightness-[1.35] hover:cursor-pointer active:brightness-110 mt-4"><img src="img/igiveyoutrash-inverted.png" class="h-14 w-14 rounded-[0.25rem] border-[1.5px] border-slate-300 opacity-70 object-contain" alt="Post button"/>
                             </button>
                             <p class="text-base text-slate-100 flex justify-center brand-font hover:cursor-default cursor-default">Post!</p>
                         </div>
@@ -91,8 +91,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="text-2xl text-slate-200 font-bold pt-7">
+            <!--added mx-4-->
+            <div class="text-2xl text-slate-200 font-bold pt-7 mx-4">
                 <div class="w-3/5 border-b-[1px] brand-font hover:cursor-default cursor-default">
                     Latest Posts
                 </div>
