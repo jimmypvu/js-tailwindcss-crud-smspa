@@ -1123,6 +1123,10 @@ video {
     width: 18rem;
   }
 
+  .lg\:w-\[14rem\] {
+    width: 14rem;
+  }
+
   .lg\:items-center {
     align-items: center;
   }
